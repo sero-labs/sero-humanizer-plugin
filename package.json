@@ -1,0 +1,73 @@
+{
+  "name": "@sero-ai/plugin-humanizer",
+  "version": "0.1.0",
+  "description": "Humanizer app for Sero — transform text with creative writing styles and remove AI patterns",
+  "keywords": [
+    "pi-package",
+    "pi-skill"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "typecheck": "tsc --noEmit -p ui/tsconfig.json"
+  },
+  "pi": {
+    "extensions": [
+      "./extension/index.ts"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
+  "sero": {
+    "app": {
+      "id": "humanizer",
+      "name": "Humanizer",
+      "icon": "pen-line",
+      "scope": "global",
+      "stateFile": ".sero/apps/humanizer/state.json",
+      "ui": "./dist/ui/remoteEntry.js",
+      "component": "HumanizerApp",
+      "devPort": 5192
+    },
+    "plugin": {
+      "category": "creative",
+      "tags": [
+        "humanizer",
+        "writing",
+        "ai-detection"
+      ],
+      "minSeroVersion": "0.1.0",
+      "preBuilt": false
+    }
+  },
+  "dependencies": {
+    "@sinclair/typebox": "^0.34.48"
+  },
+  "peerDependencies": {
+    "@mariozechner/pi-ai": ">=0.61.1",
+    "@mariozechner/pi-coding-agent": ">=0.61.1",
+    "@mariozechner/pi-tui": ">=0.61.1",
+    "zod": ">=4.0.0"
+  },
+  "devDependencies": {
+    "@module-federation/vite": "^1.11.0",
+    "@sero-ai/app-runtime": "^0.1.0",
+    "@tailwindcss/vite": "^4.1.18",
+    "@types/node": "^22.19.11",
+    "@types/react": "^19.2.13",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.7.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.468.0",
+    "radix-ui": "^1.4.3",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "streamdown": "^2.4.0",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3",
+    "vite": "^6.4.1"
+  }
+}
