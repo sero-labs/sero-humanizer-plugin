@@ -72,7 +72,7 @@ export function ModifierChips({
               'border transition-all duration-200',
               'select-none',
               isActive
-                ? 'border-indigo-500/30 bg-indigo-500/10 text-indigo-300/80'
+                ? 'border-brand-primary-border bg-brand-primary-muted text-brand-primary'
                 : [
                     'border-border/20 text-muted-foreground/35',
                     'hover:border-border/40 hover:text-muted-foreground/60',
@@ -87,7 +87,7 @@ export function ModifierChips({
                   'ml-0.5 border-none bg-transparent p-0 text-[10px] leading-none',
                   'cursor-pointer transition-colors',
                   isActive
-                    ? 'text-indigo-400/40 hover:text-indigo-300'
+                    ? 'text-brand-primary/40 hover:text-brand-primary'
                     : 'text-muted-foreground/20 hover:text-destructive',
                 )}
                 onClick={(e) => {
@@ -111,7 +111,7 @@ export function ModifierChips({
           'inline-flex items-center gap-1 rounded-md',
           'border border-dashed border-border/20',
           'px-1.5 py-0.5 text-[10px] text-muted-foreground/25',
-          'transition-all hover:border-indigo-500/25 hover:text-indigo-400/50',
+          'transition-all hover:border-brand-primary-border hover:text-brand-primary',
         )}
       >
         <svg
@@ -174,7 +174,7 @@ export function ModifierChips({
               size="sm"
               onClick={handleSave}
               disabled={!newLabel.trim() || !newPrompt.trim()}
-              className="bg-indigo-600 text-white hover:bg-indigo-500"
+              className="bg-brand-primary text-brand-primary-foreground hover:bg-brand-primary-hover"
             >
               Create
             </Button>

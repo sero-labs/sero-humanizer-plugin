@@ -149,7 +149,7 @@ function DetailPane({
             </span>
           )}
           {entry.instructions ? (
-            <span className="rounded-md bg-indigo-500/10 px-2 py-0.5 text-[10px] font-medium text-indigo-400/70">
+            <span className="rounded-md bg-brand-primary-muted px-2 py-0.5 text-[10px] font-medium text-brand-primary">
               {entry.instructions.length > 50 ? `${entry.instructions.slice(0, 50)}…` : entry.instructions}
             </span>
           ) : !entry.styleIds?.length ? (

@@ -158,8 +158,8 @@ function ActiveStyleInfo({ styles }: { styles: Style[] }) {
   }
 
   return (
-    <div className="rounded-lg border border-indigo-500/15 bg-indigo-500/[0.04] px-3 py-2">
-      <div className="flex items-center gap-1.5 text-[12px] text-indigo-300/80">
+    <div className="rounded-lg border border-brand-primary-border bg-brand-primary-muted px-3 py-2">
+      <div className="flex items-center gap-1.5 text-[12px] text-brand-primary">
         <span className="text-[13px]">✦</span>
         <span>
           Blending{' '}
@@ -269,7 +269,7 @@ export function StyleSelector({
             'inline-flex items-center gap-1 rounded-lg',
             'border border-dashed border-border/30',
             'px-2 py-1 text-[11px] text-muted-foreground/30',
-            'transition-all hover:border-violet-500/30 hover:text-violet-400/60',
+            'transition-all hover:border-brand-primary-border hover:text-brand-primary',
           )}
         >
           <svg
@@ -412,7 +412,7 @@ function CreateStyleDialog({
                   className={cn(
                     'rounded-md px-2.5 py-1 text-xs transition-colors',
                     category === cat.id
-                      ? 'bg-violet-500/15 text-violet-300'
+                      ? 'bg-brand-primary-muted text-brand-primary'
                       : 'text-muted-foreground/50 hover:text-muted-foreground',
                   )}
                 >
@@ -434,7 +434,7 @@ function CreateStyleDialog({
             size="sm"
             onClick={onSave}
             disabled={!label.trim() || !prompt.trim()}
-            className="bg-violet-600 text-white hover:bg-violet-500"
+            className="bg-brand-primary text-brand-primary-foreground hover:bg-brand-primary-hover"
           >
             Create style
           </Button>

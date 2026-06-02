@@ -27,6 +27,11 @@
   --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-brand-primary: var(--brand-primary, #34d399);
+  --color-brand-primary-hover: var(--brand-primary-hover, #6ee7b7);
+  --color-brand-primary-foreground: var(--brand-primary-foreground, #052e1c);
+  --color-brand-primary-muted: var(--brand-primary-muted, rgba(52, 211, 153, 0.12));
+  --color-brand-primary-border: var(--brand-primary-border, rgba(52, 211, 153, 0.2));
   --color-destructive: var(--destructive);
   --color-border: var(--border);
   --color-input: var(--input);
