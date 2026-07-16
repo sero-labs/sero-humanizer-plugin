@@ -2,6 +2,7 @@
   "name": "@sero-ai/plugin-humanizer",
   "version": "0.1.1",
   "description": "Humanizer app for Sero — transform text with creative writing styles and remove AI patterns",
+  "type": "module",
   "keywords": [
     "pi-package",
     "pi-skill"
