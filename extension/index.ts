@@ -16,6 +16,7 @@ import { StringEnum } from '@earendil-works/pi-ai';
 import type { ExtensionAPI } from '@earendil-works/pi-coding-agent';
 import { Text } from '@earendil-works/pi-tui';
 import { Type } from 'typebox';
+import { withStateLock } from '@sero-ai/extension-runtime';
 
 import type { HumanizerState, HumanizeEntry } from '../shared/types';
 import { DEFAULT_STATE } from '../shared/types';
@@ -87,10 +88,10 @@ export default function (pi: ExtensionAPI) {
 
     async execute(_toolCallId, params) {
       const filePath = statePath();
-      const state = await readState(filePath);
 
       switch (params.action) {
         case 'list': {
+          const state = await readState(filePath);
           return {
             content: [{ type: 'text', text: formatHistory(state) }],
             details: {},
@@ -98,23 +99,31 @@ export default function (pi: ExtensionAPI) {
         }
 
         case 'save': {
-          if (!params.input || !params.output) {
+          const { input, output } = params;
+          if (!input || !output) {
             return {
               content: [{ type: 'text', text: 'Error: input and output are required for save' }],
               details: {},
             };
           }
-          const entry: HumanizeEntry = {
-            id: state.nextId,
-            inputText: params.input,
-            instructions: params.instructions ?? '',
-            outputText: params.output,
-            createdAt: new Date().toISOString(),
-            styleIds: params.styles ? params.styles.split(',').map((s) => s.trim()) : undefined,
-          };
-          state.entries = [...state.entries.slice(-19), entry]; // keep last 20
-          state.nextId++;
-          await writeState(filePath, state);
+          // Read+write under the shared `<stateFile>.lock` mutex so this
+          // cannot interleave with the Sero host writing the same file for
+          // the UI (#428).
+          const entry = await withStateLock(filePath, async () => {
+            const state = await readState(filePath);
+            const entry: HumanizeEntry = {
+              id: state.nextId,
+              inputText: input,
+              instructions: params.instructions ?? '',
+              outputText: output,
+              createdAt: new Date().toISOString(),
+              styleIds: params.styles ? params.styles.split(',').map((s) => s.trim()) : undefined,
+            };
+            state.entries = [...state.entries.slice(-19), entry]; // keep last 20
+            state.nextId++;
+            await writeState(filePath, state);
+            return entry;
+          });
           return {
             content: [{ type: 'text', text: `Saved transformation #${entry.id}` }],
             details: {},
